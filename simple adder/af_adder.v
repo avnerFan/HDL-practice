@@ -1,4 +1,9 @@
-/* This module implements a synchronous adder that operates on two input values, in_a and in_b, under the control of an enable signal. It receives five inputs: clock, reset, in_a, in_b, and enable. When the enable signal is high, the module adds the values of in_a and in_b, and the result is output as sum on the next rising edge of the clock. If enable is low, the output sum retains its previous value. The reset signal resets the output to a default value (zero).*/
+/* This module implements a synchronous adder that operates on two input values,
+in_a and in_b, under the control of an enable signal.
+It receives five inputs: clock, reset, in_a, in_b, and enable.
+When the enable signal is high, the module adds the values of in_a and in_b,
+and the result is output as sum on the next rising edge of the clock.
+If enable is low, the output sum retains its previous value. The reset signal resets the output to a default value (zero).*/
 
 module af_adder #(
   parameter WIDTH = 32
