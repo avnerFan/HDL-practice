@@ -58,5 +58,5 @@ class driver extends uvm_agent;
     end
       
   endtask 
-    
+ 
 endclass : driver
