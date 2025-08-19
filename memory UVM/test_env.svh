@@ -21,7 +21,8 @@ class test_env extends uvm_env;
   // Register this class with the UVM factory
   `uvm_component_utils(test_env)
   
-  // Environment subcomponents
+//-- Ports and internal variables
+
   driver     drv;
   tester     tst;
   monitor    mnt;
@@ -33,12 +34,15 @@ class test_env extends uvm_env;
   uvm_tlm_fifo #(mem_op) tester2driver_fifo;
   uvm_tlm_fifo #(mem_op) predictor2comparator_fifo;
   
-  // Constructor
+//-- Constructor
+
   function new(string name = "test_env", uvm_component parent = null);
     super.new(name, parent);
   endfunction : new
   
-  // Build phase: create components and FIFOs
+//-- Build phase
+
+  // create components and FIFOs
   virtual function void build_phase(uvm_phase phase);
     drv  = driver   ::type_id::create("drv",  this);
     tst  = tester   ::type_id::create("tst",  this);
@@ -51,7 +55,9 @@ class test_env extends uvm_env;
     predictor2comparator_fifo = new("predictor2comparator_fifo");
   endfunction : build_phase
   
-  // Connect phase: hook up ports and exports
+//-- Connect phase
+
+  // hook up ports and exports
   virtual function void connect_phase(uvm_phase phase);
     // Tester -> Driver (via FIFO)
     tst.tester_2_driver_port.connect(tester2driver_fifo.put_export);

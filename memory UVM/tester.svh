@@ -20,29 +20,26 @@ class tester extends uvm_agent;
   // Port to send transactions to driver
   uvm_put_port #(mem_op) tester_2_driver_port;
   
-  //--------------------------------------------------------------------------
-  // Constructor
-  //--------------------------------------------------------------------------
+//-- Constructor
+
   function new(string name = "tester", uvm_component parent = null);
     super.new(name, parent);
   endfunction : new
   
-  //--------------------------------------------------------------------------
-  // Build Phase
+//-- Build Phase
+
   // Description: Allocate put_port for driver connection
-  //--------------------------------------------------------------------------
   virtual function void build_phase (uvm_phase phase);
     tester_2_driver_port = new("tester_2_driver_port", this);
   endfunction : build_phase
   
-  //--------------------------------------------------------------------------
-  // Run Phase
+//-- Run Phase
+
   // Description:
   //   - Raises objection to keep simulation alive
   //   - Generates and randomizes memory requests
   //   - Clones and sends them to driver
   //   - Drops objection when finished
-  //--------------------------------------------------------------------------
   task run_phase (uvm_phase phase);
     mem_op cln;
     mem_op mem_req = new();

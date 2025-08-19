@@ -15,15 +15,13 @@ package memory_pkg;
   // Import UVM library
   import uvm_pkg::*;
 
-  //---------------------------------------------------------------------- 
-  // Parameters
-  //----------------------------------------------------------------------
+//-- Parameters
+
   parameter WIDTH = 32;  // Width of memory data bus
   parameter LENGTH = 32; // Number of memory locations
 
-  //---------------------------------------------------------------------- 
-  // Include UVM macros and component files
-  //----------------------------------------------------------------------
+//-- Include UVM macros and component files
+
   `include "uvm_macros.svh"
   `include "mem_op.svh"
   `include "tester.svh"
@@ -35,9 +33,8 @@ package memory_pkg;
   `include "test_env.svh"
   `include "memory_tst.svh"
 
-  //---------------------------------------------------------------------- 
-  // Global Virtual Interface
-  //---------------------------------------------------------------------- 
+//-- Global Virtual Interface
+
   // Shared virtual interface handle for the memory interface.
   // All components can bind to this to drive or monitor signals.
   virtual interface memory_if global_mif;

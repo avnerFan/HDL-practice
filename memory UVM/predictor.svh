@@ -12,7 +12,9 @@ class predictor extends uvm_agent;
 
   // Register this class with the UVM factory
   `uvm_component_utils(predictor)
-  
+ 
+//-- Ports and internal variables
+ 
   // Reference model of memory used for prediction
   logic [WIDTH - 1: 0] verif_mem [0: LENGTH - 1];
 
@@ -25,19 +27,23 @@ class predictor extends uvm_agent;
   uvm_put_port #(mem_op) predictor_2_comparator_port;
   uvm_tlm_analysis_fifo #(mem_op) obs_fifo;
   
-  // Constructor
+//-- Constructor
+
   function new(string name = "predictor", uvm_component parent = null);
     super.new(name, parent);
   endfunction : new
   
-  // Build phase: create TLM ports
+//-- Build phase
+
+  //create TLM ports
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     predictor_2_comparator_port = new("predictor_2_comparator_port", this);
     obs_fifo = new("obs_fifo", this);
   endfunction : build_phase
   
-  // Run phase:
+//-- Run phase
+
   // - Waits for transactions from the monitor (via obs_fifo).
   // - On write: updates the reference memory.
   // - On read: generates expected transaction with predicted data,

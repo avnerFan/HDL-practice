@@ -12,10 +12,13 @@ class monitor extends uvm_agent;
   // Register this class with the UVM factory
   `uvm_component_utils(monitor)
 
+//-- Ports and internal variables
+
   // Virtual interface handle to connect with DUT
   virtual interface memory_if mif;
     
-  // Constructor
+//-- Constructor
+
   function new(string name = "monitor", uvm_component parent = null);
     super.new(name, parent);
   endfunction : new
@@ -26,7 +29,9 @@ class monitor extends uvm_agent;
   uvm_analysis_port #(mem_op) ap_monitor_to_predictor;
   uvm_analysis_port #(mem_op) ap_monitor_to_comparator;
     
-  // Build phase: connect virtual interface and create analysis ports
+//-- Build phase
+
+  //connect virtual interface and create analysis ports
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     mif = memory_pkg::global_mif;
@@ -34,7 +39,8 @@ class monitor extends uvm_agent;
     ap_monitor_to_comparator = new("ap_monitor_to_comparator", this);
   endfunction : build_phase
     
-  // Run phase:
+//-- Run phase
+
   // - Continuously samples signals at every positive clock edge.
   // - Captures transaction information into a mem_op object.
   // - Clones the transaction before broadcasting to ensure data integrity.
